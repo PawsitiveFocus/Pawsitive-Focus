@@ -122,6 +122,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "simple_gesture_detector",
+      "rootUri": "file:///C:/Users/Mina/AppData/Local/Pub/Cache/hosted/pub.dev/simple_gesture_detector-0.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "sky_engine",
       "rootUri": "file:///C:/Users/Mina/Documents/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
@@ -170,6 +176,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "table_calendar",
+      "rootUri": "file:///C:/Users/Mina/AppData/Local/Pub/Cache/hosted/pub.dev/table_calendar-3.0.9",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "term_glyph",
       "rootUri": "file:///C:/Users/Mina/AppData/Local/Pub/Cache/hosted/pub.dev/term_glyph-1.2.1",
       "packageUri": "lib/",
@@ -206,7 +218,7 @@
       "languageVersion": "3.1"
     }
   ],
-  "generated": "2023-11-11T18:19:21.614772Z",
+  "generated": "2023-11-11T19:26:48.826268Z",
   "generator": "pub",
   "generatorVersion": "3.1.3"
 }

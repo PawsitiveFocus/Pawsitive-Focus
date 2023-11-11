@@ -9,8 +9,7 @@ class HomepageView extends StatefulWidget {
 
 class HomepageViewState extends State<HomepageView> {
   final HomepageViewModel viewModel = HomepageViewModel();
-  int selectedHours = 0;
-  int selectedMinutes = 0;
+
 
   //pop up to add new task
   void showAddTaskDialog(BuildContext context) {
@@ -53,7 +52,8 @@ class HomepageViewState extends State<HomepageView> {
 
 
   void setFocusTime(BuildContext context) {
-
+    int selectedHours = 0;
+    int selectedMinutes = 0;
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -140,23 +140,47 @@ class HomepageViewState extends State<HomepageView> {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: FloatingActionButton(
-              onPressed: () {
-                setFocusTime(context);
+            child: LayoutBuilder(
+              builder: (BuildContext context, BoxConstraints constraints) {
+                // Calculate the size based on the screen width
+                double buttonSize = MediaQuery.of(context).size.width * 0.2;
+
+                return SizedBox(
+                  height: buttonSize,
+                  width: buttonSize,
+                  child: FloatingActionButton(
+                    onPressed: () {
+                      setFocusTime(context);
+                    },
+                    child: Text('Focus'),
+                    tooltip: 'Focus',
+                  ),
+                );
               },
-              child: Icon(Icons.add),
-              tooltip: 'Focus',
             ),
           ),
+
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: ElevatedButton(
-              onPressed: () {
-                // Add your functionality here
+            child: LayoutBuilder(
+              builder: (BuildContext context, BoxConstraints constraints) {
+                // Calculate the size based on the screen width
+                double buttonSize = MediaQuery.of(context).size.width * 0.05;
+
+                return SizedBox(
+                  height: buttonSize,
+                  width: buttonSize * 2,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // Add your functionality here
+                    },
+                    child: Text('Start'),
+                  ),
+                );
               },
-              child: Text('Start'),
             ),
           ),
+
           Expanded(
             child: ListView.builder(
               itemCount: viewModel.tasks.length,
