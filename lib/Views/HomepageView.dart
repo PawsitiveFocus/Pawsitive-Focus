@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:pawsitivefocus/ViewModels/HomepageViewModel.dart';
 import 'package:numberpicker/numberpicker.dart';
 
+int hours = 0;
+int minutes = 0;
+
 class HomepageView extends StatefulWidget {
   @override
   HomepageViewState createState() => HomepageViewState();
@@ -74,6 +77,7 @@ class HomepageViewState extends State<HomepageView> {
                   minValue: 0,
                   maxValue: 59,
                   onChanged: (value) => setState(() => selectedMinutes = value),
+
                 ),
                 Text('mins'),
               ],
@@ -164,7 +168,6 @@ class HomepageViewState extends State<HomepageView> {
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: LayoutBuilder(
               builder: (BuildContext context, BoxConstraints constraints) {
-                // Calculate the size based on the screen width
                 double buttonSize = MediaQuery.of(context).size.width * 0.05;
 
                 return SizedBox(
@@ -172,7 +175,7 @@ class HomepageViewState extends State<HomepageView> {
                   width: buttonSize * 2,
                   child: ElevatedButton(
                     onPressed: () {
-                      // Add your functionality here
+                      //viewModel.setFocusTime(selectedHours, selectedMinutes);
                     },
                     child: Text('Start'),
                   ),

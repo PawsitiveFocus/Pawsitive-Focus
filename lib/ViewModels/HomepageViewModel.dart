@@ -15,4 +15,8 @@ class HomepageViewModel {
       tasks.removeAt(index);
     }
   }
+  int setFocusTime(int hours, int minutes){
+    int total_minutes = (hours * 60) + minutes;
+    return total_minutes;
+  }
 }
