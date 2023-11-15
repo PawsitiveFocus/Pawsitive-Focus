@@ -16,7 +16,7 @@ class HomepageViewModel {
     }
   }
   int setFocusTime(int hours, int minutes){
-    int total_minutes = (hours * 60) + minutes;
-    return total_minutes;
+    int totalMinutes = (hours * 60) + minutes;
+    return totalMinutes;
   }
 }

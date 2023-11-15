@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pawsitivefocus/ViewModels/HomepageViewModel.dart';
-import 'package:numberpicker/numberpicker.dart';
 
 TimeOfDay selectedTime = TimeOfDay.now();
 
@@ -19,7 +18,7 @@ class HomepageViewState extends State<HomepageView> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Add a New Task'),
+          title: const Text('Add a New Task'),
           content: TextField(
             onChanged: (value) {
               newTask = value;
@@ -51,16 +50,16 @@ class HomepageViewState extends State<HomepageView> {
     );
   }
 
-  void setFocusTime(BuildContext context) async {
+  void setFocusTime(BuildContext context) {
 
-    final TimeOfDay? picked = await showTimePicker(
+    final TimeOfDay timePicked =  showTimePicker(
       context: context,
       initialTime: selectedTime,
-    );
+    ) as TimeOfDay;
 
-    if (picked != null && picked != selectedTime) {
+    if (timePicked != null && timePicked != selectedTime) {
       setState(() {
-        selectedTime = picked;
+        selectedTime = timePicked;
       });
     }
   }
@@ -84,8 +83,8 @@ class HomepageViewState extends State<HomepageView> {
                     onPressed: () {
                       setFocusTime(context);
                     },
-                    child: Text('Focus'),
                     tooltip: 'Focus',
+                    child: const Text('Focus'),
                   ),
                 );
               },
@@ -104,7 +103,7 @@ class HomepageViewState extends State<HomepageView> {
                     onPressed: () {
                       // viewModel.setFocusTime(selectedHours, selectedMinutes);
                     },
-                    child: Text('Start'),
+                    child: const Text('Start'),
                   ),
                 );
               },
@@ -134,7 +133,7 @@ class HomepageViewState extends State<HomepageView> {
                         title: Text(viewModel.tasks[index]),
                       ),
                     ),
-                    Divider(), // Add a horizontal line between ListTiles
+                    const Divider(), // Add a horizontal line between ListTiles
                   ],
                 );
               },
@@ -146,7 +145,7 @@ class HomepageViewState extends State<HomepageView> {
         onPressed: () {
           showAddTaskDialog(context);
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
