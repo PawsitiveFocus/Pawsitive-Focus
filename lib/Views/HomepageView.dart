@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pawsitivefocus/ViewModels/HomepageViewModel.dart';
 import 'package:numberpicker/numberpicker.dart';
 
-int hours = 0;
-int minutes = 0;
+TimeOfDay selectedTime = TimeOfDay.now();
 
 class HomepageView extends StatefulWidget {
   @override
@@ -13,8 +12,7 @@ class HomepageView extends StatefulWidget {
 class HomepageViewState extends State<HomepageView> {
   final HomepageViewModel viewModel = HomepageViewModel();
 
-
-  //pop up to add new task
+  // Pop up to add new task
   void showAddTaskDialog(BuildContext context) {
     String newTask = '';
     showDialog(
@@ -53,88 +51,19 @@ class HomepageViewState extends State<HomepageView> {
     );
   }
 
+  void setFocusTime(BuildContext context) async {
 
-  void setFocusTime(BuildContext context) {
-    int selectedHours = 0;
-    int selectedMinutes = 0;
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Select Focus Duration'),
-            content: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                NumberPicker(
-                  value: selectedHours,
-                  minValue: 0,
-                  maxValue: 23,
-                  onChanged: (value) => setState(() => selectedHours = value),
-                ),
-                Text('hours'),
-                NumberPicker(
-                  value: selectedMinutes,
-                  minValue: 0,
-                  maxValue: 59,
-                  onChanged: (value) => setState(() => selectedMinutes = value),
-
-                ),
-                Text('mins'),
-              ],
-            ),
-            actions: <Widget>[
-              // ... actions ...
-            ],
-          );
-        },
-      );
-
-
-
-
-    /*
-    TimeOfDay selectedTime = TimeOfDay.now(); // Default or previously selected time
-
-    showDialog(
+    final TimeOfDay? picked = await showTimePicker(
       context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Focus Popup'),
-          content: Text('Select a focus time.'),
-          actions: <Widget>[
-            ElevatedButton(
-              child: Text('Pick Time'),
-              onPressed: () async {
-                final TimeOfDay? picked = await showTimePicker(
-                  context: context,
-                  initialTime: selectedTime,
-                );
-
-                if (picked != null && picked != selectedTime) {
-                  // Do something with the picked time
-                  // For example, update the state or store the time
-                  setState(() {
-                    selectedTime = picked;
-                  });
-                  // You can also close the dialog if needed
-                  // Navigator.of(context).pop();
-                }
-              },
-            ),
-            ElevatedButton(
-              child: Text('Close'),
-              onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
-              },
-            ),
-          ],
-        );
-      },
+      initialTime: selectedTime,
     );
-    */
+
+    if (picked != null && picked != selectedTime) {
+      setState(() {
+        selectedTime = picked;
+      });
+    }
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -146,8 +75,7 @@ class HomepageViewState extends State<HomepageView> {
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: LayoutBuilder(
               builder: (BuildContext context, BoxConstraints constraints) {
-                // Calculate the size based on the screen width
-                double buttonSize = MediaQuery.of(context).size.width * 0.2;
+                double buttonSize = MediaQuery.of(context).size.width * 0.4;
 
                 return SizedBox(
                   height: buttonSize,
@@ -163,19 +91,18 @@ class HomepageViewState extends State<HomepageView> {
               },
             ),
           ),
-
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: LayoutBuilder(
               builder: (BuildContext context, BoxConstraints constraints) {
-                double buttonSize = MediaQuery.of(context).size.width * 0.05;
+                double buttonSize = MediaQuery.of(context).size.width * 0.1;
 
                 return SizedBox(
                   height: buttonSize,
                   width: buttonSize * 2,
                   child: ElevatedButton(
                     onPressed: () {
-                      //viewModel.setFocusTime(selectedHours, selectedMinutes);
+                      // viewModel.setFocusTime(selectedHours, selectedMinutes);
                     },
                     child: Text('Start'),
                   ),
@@ -183,28 +110,32 @@ class HomepageViewState extends State<HomepageView> {
               },
             ),
           ),
-
           Expanded(
             child: ListView.builder(
               itemCount: viewModel.tasks.length,
               itemBuilder: (context, index) {
-                return Dismissible(
-                  key: Key(viewModel.tasks[index]),
-                  direction: DismissDirection.horizontal,
-                  onDismissed: (direction) {
-                    setState(() {
-                      viewModel.deleteTask(index);
-                    });
-                  },
-                  background: Container(
-                    color: Colors.red,
-                    alignment: Alignment.centerLeft,
-                    padding: EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Icon(Icons.delete, color: Colors.white),
-                  ),
-                  child: ListTile(
-                    title: Text(viewModel.tasks[index]),
-                  ),
+                return Column(
+                  children: [
+                    Dismissible(
+                      key: Key(viewModel.tasks[index]),
+                      direction: DismissDirection.horizontal,
+                      onDismissed: (direction) {
+                        setState(() {
+                          viewModel.deleteTask(index);
+                        });
+                      },
+                      background: Container(
+                        color: Colors.red,
+                        alignment: Alignment.centerLeft,
+                        padding: EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Icon(Icons.delete, color: Colors.white),
+                      ),
+                      child: ListTile(
+                        title: Text(viewModel.tasks[index]),
+                      ),
+                    ),
+                    Divider(), // Add a horizontal line between ListTiles
+                  ],
                 );
               },
             ),
@@ -219,5 +150,4 @@ class HomepageViewState extends State<HomepageView> {
       ),
     );
   }
-
 }
