@@ -4,6 +4,9 @@ import 'package:pawsitivefocus/Views/HomepageView.dart';
 import 'package:pawsitivefocus/Views/HomepageView.dart';
 import 'package:pawsitivefocus/Views/PetView.dart';
 
+import 'Models/PetModel.dart';
+import 'ViewModels/PetViewModel.dart';
+
 
 void main() => runApp(const NavigationBarApp());
 
@@ -30,6 +33,8 @@ class Navigation extends StatefulWidget {
 
 class _NavigationState extends State<Navigation> {
   int currentPageIndex = 0;
+
+  final PetViewModel petViewModel = PetViewModel(PetModel(name: 'Buddy', happiness: 50, money: 100));
 
 
   @override
@@ -81,7 +86,7 @@ class _NavigationState extends State<Navigation> {
         Container(
           color: Colors.white,
           alignment: Alignment.center,
-          child: PetView(),
+          child: PetView(viewModel: petViewModel),
         ),
         Container(
           color: Colors.white,
