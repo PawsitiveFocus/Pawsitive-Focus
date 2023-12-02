@@ -8,16 +8,16 @@ class FocusPageViewModel {
 
   Timer? _countdownTimer;
   StreamController<int> _countdownController = StreamController<int>.broadcast();
-  int _countdownTime = 300; // 5 minutes in seconds
+  int _countdownTime; // Countdown time in seconds
 
   Function? onCountdownComplete; // Callback for when countdown completes
 
   Stream<int> get countdownStream => _countdownController.stream;
-
   Stream<DateTime> get timeStream => _timeController.stream;
   Stream<int> get moneyStream => _moneyController.stream;
 
-  FocusPageViewModel() {
+  FocusPageViewModel({int initialCountdownTime = 300})
+      : _countdownTime = initialCountdownTime { // Default to 5 minutes if not provided
     _moneyController.add(_money); // Initialize the money stream with the starting value
   }
 
@@ -41,7 +41,6 @@ class FocusPageViewModel {
     });
   }
 
-  @override
   void cancelTimer() {
     _timer?.cancel();
     _countdownTimer?.cancel();

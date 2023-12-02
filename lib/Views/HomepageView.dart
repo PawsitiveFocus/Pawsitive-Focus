@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:pawsitivefocus/ViewModels/HomepageViewModel.dart';
 import 'package:pawsitivefocus/Views/FocusPageView.dart';
 
-TimeOfDay selectedTime = TimeOfDay.now();
-
 class HomepageView extends StatefulWidget {
   @override
   HomepageViewState createState() => HomepageViewState();
@@ -11,8 +9,8 @@ class HomepageView extends StatefulWidget {
 
 class HomepageViewState extends State<HomepageView> {
   final HomepageViewModel viewModel = HomepageViewModel();
+  TimeOfDay selectedTime = TimeOfDay.now();
 
-  // Pop up to add new task
   void showAddTaskDialog(BuildContext context) {
     String newTask = '';
     showDialog(
@@ -40,7 +38,7 @@ class HomepageViewState extends State<HomepageView> {
               onPressed: () {
                 if (newTask.isNotEmpty) {
                   viewModel.addTask(newTask);
-                  setState(() {}); // Trigger a rebuild of the widget tree
+                  setState(() {});
                 }
                 Navigator.of(context).pop();
               },
@@ -51,12 +49,11 @@ class HomepageViewState extends State<HomepageView> {
     );
   }
 
-  void setFocusTime(BuildContext context) {
-
-    final TimeOfDay timePicked =  showTimePicker(
+  void setFocusTime(BuildContext context) async {
+    final TimeOfDay? timePicked = await showTimePicker(
       context: context,
       initialTime: selectedTime,
-    ) as TimeOfDay;
+    );
 
     if (timePicked != null && timePicked != selectedTime) {
       setState(() {
@@ -102,10 +99,14 @@ class HomepageViewState extends State<HomepageView> {
                   width: buttonSize * 2,
                   child: ElevatedButton(
                     onPressed: () {
-                      // viewModel.setFocusTime(selectedHours, selectedMinutes);
+                      final now = DateTime.now();
+                      final currentTime = DateTime(now.year, now.month, now.day, selectedTime.hour, selectedTime.minute);
+                      final difference = currentTime.difference(now).inMinutes;
+                      final seconds = difference * 60;
+
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => FocusPageView()),
+                        MaterialPageRoute(builder: (context) => FocusPageView(initialCountdown: seconds)),
                       );
                     },
                     child: const Text('Start'),
