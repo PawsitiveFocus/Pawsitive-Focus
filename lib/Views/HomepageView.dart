@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pawsitivefocus/ViewModels/HomepageViewModel.dart';
+import 'package:pawsitivefocus/Views/FocusPageView.dart';
 
 TimeOfDay selectedTime = TimeOfDay.now();
 
@@ -102,6 +103,10 @@ class HomepageViewState extends State<HomepageView> {
                   child: ElevatedButton(
                     onPressed: () {
                       // viewModel.setFocusTime(selectedHours, selectedMinutes);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => FocusPageView()),
+                      );
                     },
                     child: const Text('Start'),
                   ),
