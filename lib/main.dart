@@ -3,6 +3,7 @@ import 'package:pawsitivefocus/Views/CalendarView.dart';
 import 'package:pawsitivefocus/Views/HomepageView.dart';
 import 'package:pawsitivefocus/Views/HomepageView.dart';
 import 'package:pawsitivefocus/Views/PetView.dart';
+import 'package:pawsitivefocus/Views/SettingView.dart';
 
 import 'Models/PetModel.dart';
 import 'ViewModels/PetViewModel.dart';
@@ -91,7 +92,7 @@ class _NavigationState extends State<Navigation> {
         Container(
           color: Colors.white,
           alignment: Alignment.center,
-          child: const Text('Settings page to be implemented later'),
+          child: SettingView(),
         ),
       ][currentPageIndex],
     );
