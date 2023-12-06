@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:pawsitivefocus/ViewModels/HomepageViewModel.dart';
-import 'package:pawsitivefocus/Views/FocusPageView.dart';
+import 'FocusPageView.dart';
 
 class HomepageView extends StatefulWidget {
+  final HomepageViewModel viewModel;
+
+  HomepageView({Key? key, required this.viewModel}) : super(key: key);
+
   @override
   HomepageViewState createState() => HomepageViewState();
 }
 
 class HomepageViewState extends State<HomepageView> {
-  final HomepageViewModel viewModel = HomepageViewModel();
   TimeOfDay selectedTime = TimeOfDay.now();
 
   void showAddTaskDialog(BuildContext context) {
@@ -37,7 +40,7 @@ class HomepageViewState extends State<HomepageView> {
               child: const Text('Add'),
               onPressed: () {
                 if (newTask.isNotEmpty) {
-                  viewModel.addTask(newTask);
+                  widget.viewModel.addTask(newTask);
                   setState(() {});
                 }
                 Navigator.of(context).pop();
@@ -117,16 +120,16 @@ class HomepageViewState extends State<HomepageView> {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: viewModel.tasks.length,
+              itemCount: widget.viewModel.tasks.length,
               itemBuilder: (context, index) {
                 return Column(
                   children: [
                     Dismissible(
-                      key: Key(viewModel.tasks[index]),
+                      key: Key(widget.viewModel.tasks[index]),
                       direction: DismissDirection.horizontal,
                       onDismissed: (direction) {
                         setState(() {
-                          viewModel.deleteTask(index);
+                          widget.viewModel.deleteTask(index);
                         });
                       },
                       background: Container(
@@ -136,7 +139,7 @@ class HomepageViewState extends State<HomepageView> {
                         child: Icon(Icons.delete, color: Colors.white),
                       ),
                       child: ListTile(
-                        title: Text(viewModel.tasks[index]),
+                        title: Text(widget.viewModel.tasks[index]),
                       ),
                     ),
                     const Divider(), // Add a horizontal line between ListTiles

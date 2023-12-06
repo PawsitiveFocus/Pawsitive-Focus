@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
 
-class SettingView extends StatelessWidget {
+class SettingView extends StatefulWidget {
+  @override
+  _SettingViewState createState() => _SettingViewState();
+}
+
+class _SettingViewState extends State<SettingView> {
+  bool petModelSwitchValue = true;
+  bool languageSwitchValue = false;
+  bool nightModeSwitchValue = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -10,13 +19,37 @@ class SettingView extends StatelessWidget {
       body: ListView(
         children: <Widget>[
           ListTile(
-            title: Text('1.Turn off per model'),
+            title: Text('Turn off pet model'),
+            trailing: Switch(
+              value: petModelSwitchValue,
+              onChanged: (value) {
+                setState(() {
+                  petModelSwitchValue = value;
+                });
+              },
+            ),
           ),
           ListTile(
-            title: Text('2. Change the language '),
+            title: Text('Change the language'),
+            trailing: Switch(
+              value: languageSwitchValue,
+              onChanged: (value) {
+                setState(() {
+                  languageSwitchValue = value;
+                });
+              },
+            ),
           ),
           ListTile(
-            title: Text('3. Night mode'),
+            title: Text('Night mode'),
+            trailing: Switch(
+              value: nightModeSwitchValue,
+              onChanged: (value) {
+                setState(() {
+                  nightModeSwitchValue = value;
+                });
+              },
+            ),
           ),
         ],
       ),

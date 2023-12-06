@@ -1,19 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:pawsitivefocus/Models/HomepageModel.dart';
 import 'package:pawsitivefocus/Views/CalendarView.dart';
 import 'package:pawsitivefocus/Views/HomepageView.dart';
 import 'package:pawsitivefocus/Views/HomepageView.dart';
 import 'package:pawsitivefocus/Views/PetView.dart';
 import 'package:pawsitivefocus/Views/SettingView.dart';
 
+
+import 'Models/CalendarModel.dart';
 import 'Models/PetModel.dart';
+import 'ViewModels/CalendarViewModel.dart';
+import 'ViewModels/HomepageViewModel.dart';
 import 'ViewModels/PetViewModel.dart';
+
+
 
 
 void main() => runApp(const NavigationBarApp());
 
 
+
 class NavigationBarApp extends StatelessWidget {
   const NavigationBarApp({super.key});
+
+
 
 
   @override
@@ -23,8 +33,12 @@ class NavigationBarApp extends StatelessWidget {
 }
 
 
+
+
 class Navigation extends StatefulWidget {
   const Navigation({super.key});
+
+
 
 
   @override
@@ -32,10 +46,15 @@ class Navigation extends StatefulWidget {
 }
 
 
+
+
 class _NavigationState extends State<Navigation> {
   int currentPageIndex = 0;
-
   final PetViewModel petViewModel = PetViewModel(PetModel(name: 'Buddy', happiness: 50, money: 100));
+  final CalendarViewModel calendarViewModel = CalendarViewModel();
+  final HomepageViewModel homepageViewModel = HomepageViewModel();
+
+
 
 
   @override
@@ -71,18 +90,20 @@ class _NavigationState extends State<Navigation> {
           ),
 
 
+
+
         ],
       ),
       body: <Widget>[
         Container(
           color: Colors.white,
           alignment: Alignment.center,
-          child: HomepageView(),
+          child: HomepageView(viewModel: homepageViewModel),
         ),
         Container(
           color: Colors.white,
           alignment: Alignment.center,
-          child: MyCalendarView(),
+          child: MyCalendarView(viewModel: calendarViewModel),
         ),
         Container(
           color: Colors.white,
@@ -98,4 +119,6 @@ class _NavigationState extends State<Navigation> {
     );
   }
 }
+
+
 

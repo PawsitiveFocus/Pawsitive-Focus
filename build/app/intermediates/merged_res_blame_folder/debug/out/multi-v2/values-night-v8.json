@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.pawsitivefocus.app-mergeDebugResources-9:/values-night-v8/values-night-v8.xml",
+            "outputFile": "com.example.pawsitivefocus.app-mergeDebugResources-5:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\abram\\OneDrive\\Documents\\Pitt CS\\InterfaceDesignMethodology\\Pawsitive-Focus\\android\\app\\src\\main\\res\\values-night\\styles.xml",
+                    "source": "C:\\Pitt\\InterfaceDesignMethodology\\Pawsitive-Focus\\android\\app\\src\\main\\res\\values-night\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
