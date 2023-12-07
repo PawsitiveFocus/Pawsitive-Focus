@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:pawsitivefocus/Models/SettingsModel.dart';
+
+import '../main.dart';
 
 class SettingView extends StatefulWidget {
+  final SettingsModel model;
+
+  SettingView({Key? key, required this.model}) : super(key: key);
+
   @override
   _SettingViewState createState() => _SettingViewState();
 }
 
 class _SettingViewState extends State<SettingView> {
-  bool petModelSwitchValue = true;
-  bool languageSwitchValue = false;
-  bool nightModeSwitchValue = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,21 +25,10 @@ class _SettingViewState extends State<SettingView> {
           ListTile(
             title: Text('Turn off pet model'),
             trailing: Switch(
-              value: petModelSwitchValue,
+              value: widget.model.getPetViewOn(),
               onChanged: (value) {
                 setState(() {
-                  petModelSwitchValue = value;
-                });
-              },
-            ),
-          ),
-          ListTile(
-            title: Text('Change the language'),
-            trailing: Switch(
-              value: languageSwitchValue,
-              onChanged: (value) {
-                setState(() {
-                  languageSwitchValue = value;
+                  widget.model.setPetView();
                 });
               },
             ),
@@ -43,10 +36,12 @@ class _SettingViewState extends State<SettingView> {
           ListTile(
             title: Text('Night mode'),
             trailing: Switch(
-              value: nightModeSwitchValue,
+              value: widget.model.getDarkModeOn(),
               onChanged: (value) {
                 setState(() {
-                  nightModeSwitchValue = value;
+                  widget.model.setDarkMode();
+                  // Use the Provider package to notify listeners of the change
+                  Provider.of<ThemeProvider>(context, listen: false).setDarkMode(value);
                 });
               },
             ),
