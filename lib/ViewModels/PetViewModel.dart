@@ -1,19 +1,22 @@
 import 'package:pawsitivefocus/Models/PetModel.dart';
+import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/foundation.dart';
 
-class PetViewModel {
+class PetViewModel extends ChangeNotifier {
   final PetModel _petModel;
 
   PetViewModel(this._petModel);
 
-  // Getters for happiness and money
   int get happiness => _petModel.happiness;
   int get money => _petModel.money;
 
-  // Other methods and logic...
-
-  void onImageDoubleTapped() {
+  void onImageTapped() {
+    print(happiness);
+    print(money);
     _petModel.decreaseMoney();
     _petModel.changeHappiness();
-    // Notify listeners if necessary
+    notifyListeners();
   }
+
+
 }

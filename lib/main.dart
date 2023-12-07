@@ -5,6 +5,7 @@ import 'package:pawsitivefocus/Views/HomepageView.dart';
 import 'package:pawsitivefocus/Views/HomepageView.dart';
 import 'package:pawsitivefocus/Views/PetView.dart';
 import 'package:pawsitivefocus/Views/SettingView.dart';
+import 'package:provider/provider.dart';
 
 
 import 'Models/CalendarModel.dart';
@@ -16,7 +17,19 @@ import 'ViewModels/PetViewModel.dart';
 
 
 
-void main() => runApp(const NavigationBarApp());
+void main() {
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => PetViewModel(
+          PetModel(name: "Scooby", happiness: 50, money: 100)
+      ),
+      child: NavigationBarApp(),
+    ),
+  );
+}
+
+
+
 
 
 
@@ -108,7 +121,7 @@ class _NavigationState extends State<Navigation> {
         Container(
           color: Colors.white,
           alignment: Alignment.center,
-          child: PetView(viewModel: petViewModel),
+          child: MyPetView(viewModel: petViewModel),
         ),
         Container(
           color: Colors.white,
