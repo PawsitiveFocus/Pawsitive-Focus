@@ -23,9 +23,11 @@ class FocusPageViewModel {
 
   void startTimer() {
     _timeController.add(DateTime.now());
+    _moneyController.add(_money);
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       _timeController.add(DateTime.now());
-      if (timer.tick % 30 == 0) {
+      _moneyController.add(_money);
+      if (timer.tick % 10 == 0) {
         _money += 5;
         _moneyController.add(_money);
       }

@@ -43,11 +43,22 @@ class _FocusPageViewState extends State<FocusPageView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Focus Page')),
+      appBar: AppBar(
+          title: Text('Focus Page'),
+          leading: Container(),  // Add an empty Container as leading widget
+          automaticallyImplyLeading: false,  // Set this to false
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(top: 20, bottom: 20),
+              child: Text(
+                'Turn on and keep Focus Mode',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+            ),
             StreamBuilder<DateTime>(
               stream: viewModel.timeStream,
               builder: (context, snapshot) {
@@ -87,7 +98,32 @@ class _FocusPageViewState extends State<FocusPageView> {
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () => Navigator.pop(context),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text('Confirmation'),
+                      content: Text('Are you sure you want to quit?'),
+                      actions: <Widget>[
+                        TextButton(
+                          child: Text('Cancel'),
+                          onPressed: () {
+                            Navigator.of(context).pop(); // Close the dialog
+                          },
+                        ),
+                        TextButton(
+                          child: Text('Quit'),
+                          onPressed: () {
+                            Navigator.of(context).pop(); // Close the dialog
+                            Navigator.of(context).pop(); // Pop the current page
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
               child: Text('Forced Quit'),
             ),
           ],
