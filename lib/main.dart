@@ -94,7 +94,7 @@ class _NavigationState extends State<Navigation> {
                   Container(
                     color: Colors.white,
                     alignment: Alignment.center,
-                    child: PetView(viewModel: petViewModel),
+                    child: MyPetView(viewModel: petViewModel),
                   ),
                 Container(
                   color: Colors.white,

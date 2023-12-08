@@ -1,10 +1,13 @@
 import 'dart:async';
 
+import 'package:pawsitivefocus/Models/PetModel.dart';
+
 class FocusPageViewModel {
   Timer? _timer;
   StreamController<DateTime> _timeController = StreamController<DateTime>.broadcast();
   StreamController<int> _moneyController = StreamController<int>.broadcast();
   int _money = 0;
+  final PetModel petModel;
 
   Timer? _countdownTimer;
   StreamController<int> _countdownController = StreamController<int>.broadcast();
@@ -16,10 +19,15 @@ class FocusPageViewModel {
   Stream<DateTime> get timeStream => _timeController.stream;
   Stream<int> get moneyStream => _moneyController.stream;
 
-  FocusPageViewModel({int initialCountdownTime = 300})
-      : _countdownTime = initialCountdownTime { // Default to 5 minutes if not provided
+  FocusPageViewModel({int initialCountdownTime = 300, required this.petModel})
+      : _countdownTime = initialCountdownTime {  // Default to 5 minutes if not provided
     _moneyController.add(_money); // Initialize the money stream with the starting value
   }
+
+  void addEarnedMoneyToPet() {
+    petModel.addMoney(_money);
+  }
+
 
   void startTimer() {
     _timeController.add(DateTime.now());
@@ -37,7 +45,9 @@ class FocusPageViewModel {
         _countdownTime--;
         _countdownController.add(_countdownTime);
       } else {
+        print("test");
         _countdownTimer?.cancel();
+        addEarnedMoneyToPet();
         onCountdownComplete?.call(); // Call the callback function
       }
     });
@@ -46,6 +56,6 @@ class FocusPageViewModel {
   void cancelTimer() {
     _timer?.cancel();
     _countdownTimer?.cancel();
-    // ... existing cancellation code ...
+    addEarnedMoneyToPet();
   }
 }
