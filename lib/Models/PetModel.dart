@@ -14,10 +14,8 @@ class PetModel {
   // }
 
   void decreaseMoney() {
-    if (money > 5) {
+    if (money > 5 && happiness < 100) {
       money -= 5;
-    } else {
-      money = 0;
     }
     print(money);
     // Notify listeners of the change right here if necessary
@@ -27,10 +25,8 @@ class PetModel {
   void changeHappiness() {
     // happiness = (happiness + 5) % 100;
     // print(happiness);
-    if (happiness < 100) {
+    if (happiness < 100 && money > 0) {
       happiness += 5;
-    } else {
-      happiness = 100;
     }
     print(happiness);
     // Notify listeners of the change right here if necessary
