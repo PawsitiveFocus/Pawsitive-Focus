@@ -24,11 +24,6 @@ class PetViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void test() {
-    _petModel.changeHappiness();
-    _petModel.decreaseMoney();
-    notifyListeners();
-  }
 
 
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pawsitivefocus/ViewModels/FocusPageViewModel.dart';
+import 'package:pawsitivefocus/Models/PetModel.dart';
 import 'dart:async';
 
 class FocusPageView extends StatefulWidget {
@@ -17,7 +18,8 @@ class _FocusPageViewState extends State<FocusPageView> {
   @override
   void initState() {
     super.initState();
-    viewModel = FocusPageViewModel(initialCountdownTime: widget.initialCountdown);
+    final petModel = PetModel(name: "Scooby", happiness: 50, money: 100);
+    viewModel = FocusPageViewModel(initialCountdownTime: widget.initialCountdown, petModel: petModel);
     viewModel.startTimer();
     viewModel.onCountdownComplete = _onCountdownComplete;
   }
@@ -29,6 +31,7 @@ class _FocusPageViewState extends State<FocusPageView> {
   @override
   void dispose() {
     viewModel.cancelTimer();
+    print("test");
     super.dispose();
   }
 

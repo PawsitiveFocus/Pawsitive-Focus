@@ -26,7 +26,7 @@ class PetViewState extends State<MyPetView> {
             GestureDetector(
               onTap: () {
                 setState(() {
-                  widget.viewModel.onImageTapped(); // Now wrapped in setState to update the UI
+                  widget.viewModel.onImageTapped();
                 });
               },
               child: Image.asset(
