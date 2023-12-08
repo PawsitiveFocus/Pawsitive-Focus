@@ -10,11 +10,23 @@ class PetViewModel extends ChangeNotifier {
   int get happiness => _petModel.happiness;
   int get money => _petModel.money;
 
+  // void onImageTapped() {
+  //   print(happiness);
+  //   print(money);
+  //   _petModel.decreaseMoney();
+  //   _petModel.changeHappiness();
+  //   notifyListeners();
+  // }
+
   void onImageTapped() {
-    print(happiness);
-    print(money);
-    _petModel.decreaseMoney();
     _petModel.changeHappiness();
+    _petModel.decreaseMoney();
+    notifyListeners();
+  }
+
+  void test() {
+    _petModel.changeHappiness();
+    _petModel.decreaseMoney();
     notifyListeners();
   }
 
