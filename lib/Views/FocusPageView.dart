@@ -2,11 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:pawsitivefocus/ViewModels/FocusPageViewModel.dart';
 import 'package:pawsitivefocus/Models/PetModel.dart';
 import 'dart:async';
+import 'package:pawsitivefocus/Views/HomepageView.dart';
+import 'package:pawsitivefocus/ViewModels/HomepageViewModel.dart';
+
+// class FocusPageView extends StatefulWidget {
+//   final int initialCountdown;
+//
+//   FocusPageView({Key? key, required this.initialCountdown}) : super(key: key);
+//
+//   @override
+//   _FocusPageViewState createState() => _FocusPageViewState();
+// }
 
 class FocusPageView extends StatefulWidget {
   final int initialCountdown;
+  final HomepageViewModel homepageViewModel; // Add this line
 
-  FocusPageView({Key? key, required this.initialCountdown}) : super(key: key);
+  FocusPageView({
+    Key? key,
+    required this.initialCountdown,
+    required this.homepageViewModel, // Add this line
+  }) : super(key: key);
 
   @override
   _FocusPageViewState createState() => _FocusPageViewState();
@@ -118,8 +134,23 @@ class _FocusPageViewState extends State<FocusPageView> {
                         TextButton(
                           child: Text('Quit'),
                           onPressed: () {
-                            Navigator.of(context).pop(); // Close the dialog
-                            Navigator.of(context).pop(); // Pop the current page
+                            String? currentRouteName = ModalRoute.of(context)?.settings.name;
+                            print('Current Route Name: $currentRouteName');
+
+
+                            Navigator.of(context).pop(); // Close the confirmation dialog
+                            Navigator.of(context).pop();
+                            // Navigator.push(context,MaterialPageRoute(builder: (context) => HomepageViewModel()))
+                            // Navigator.of(context).pop(widget.homepageViewModel);
+                            // Navigator.pushReplacementNamed(context, '/route');
+                            // Navigator.of(context).popUntil(ModalRoute.withName('/'));
+                            // Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
+                            // Navigator.of(context).pushNamed('/');
+                            // Navigator.pushAndRemoveUntil(
+                            //   context,
+                            //   MaterialPageRoute(builder: (context) => HomepageView(viewModel: widget.homepageViewModel)), // Use the passed viewModel
+                            //       (Route<dynamic> route) => true, // Remove all routes below
+                            // );
                           },
                         ),
                       ],

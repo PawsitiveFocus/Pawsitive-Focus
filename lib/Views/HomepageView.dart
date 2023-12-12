@@ -109,8 +109,14 @@ class HomepageViewState extends State<HomepageView> {
 
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => FocusPageView(initialCountdown: seconds)),
+                        MaterialPageRoute(
+                          builder: (context) => FocusPageView(
+                            initialCountdown: seconds,
+                            homepageViewModel: widget.viewModel, // Pass the existing viewModel
+                          ),
+                        ),
                       );
+
                     },
                     child: const Text('Start'),
                   ),
