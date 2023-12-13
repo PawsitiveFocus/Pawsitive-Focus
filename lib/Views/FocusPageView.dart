@@ -134,10 +134,11 @@ class _FocusPageViewState extends State<FocusPageView> {
                         TextButton(
                           child: const Text('Quit'),
                           onPressed: () {
-                            Navigator.of(context).pop(); // Remove the previous dialog
-                            Navigator.push(
+                            Navigator.of(context).pop(); // Close the dialog
+                            Navigator.pushNamedAndRemoveUntil(
                               context,
-                              MaterialPageRoute(builder: (context) => HomepageView(viewModel: widget.homepageViewModel)),
+                              '/',
+                                  (route) => false, // Remove all routes from the stack
                             );
                           },
                         ),
@@ -148,6 +149,7 @@ class _FocusPageViewState extends State<FocusPageView> {
               },
               child: Text('Forced Quit'),
             ),
+
           ],
         ),
       ),
