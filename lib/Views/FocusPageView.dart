@@ -126,31 +126,19 @@ class _FocusPageViewState extends State<FocusPageView> {
                       content: Text('Are you sure you want to quit?'),
                       actions: <Widget>[
                         TextButton(
-                          child: Text('Cancel'),
+                          child: const Text('Cancel'),
                           onPressed: () {
                             Navigator.of(context).pop(); // Close the dialog
                           },
                         ),
                         TextButton(
-                          child: Text('Quit'),
+                          child: const Text('Quit'),
                           onPressed: () {
-                            String? currentRouteName = ModalRoute.of(context)?.settings.name;
-                            print('Current Route Name: $currentRouteName');
-
-
-                            Navigator.of(context).pop(); // Close the confirmation dialog
-                            Navigator.of(context).pop();
-                            // Navigator.push(context,MaterialPageRoute(builder: (context) => HomepageViewModel()))
-                            // Navigator.of(context).pop(widget.homepageViewModel);
-                            // Navigator.pushReplacementNamed(context, '/route');
-                            // Navigator.of(context).popUntil(ModalRoute.withName('/'));
-                            // Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
-                            // Navigator.of(context).pushNamed('/');
-                            // Navigator.pushAndRemoveUntil(
-                            //   context,
-                            //   MaterialPageRoute(builder: (context) => HomepageView(viewModel: widget.homepageViewModel)), // Use the passed viewModel
-                            //       (Route<dynamic> route) => true, // Remove all routes below
-                            // );
+                            Navigator.of(context).pop(); // Remove the previous dialog
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => HomepageView(viewModel: widget.homepageViewModel)),
+                            );
                           },
                         ),
                       ],
