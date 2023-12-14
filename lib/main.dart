@@ -8,6 +8,7 @@ import 'package:pawsitivefocus/Views/PetView.dart';
 import 'package:pawsitivefocus/Views/SettingView.dart';
 import 'Models/CalendarModel.dart';
 import 'Models/PetModel.dart';
+import 'Services/GlobalData.dart';
 import 'ViewModels/CalendarViewModel.dart';
 import 'ViewModels/HomepageViewModel.dart';
 import 'ViewModels/PetViewModel.dart';
@@ -32,7 +33,7 @@ class Navigation extends StatefulWidget {
 
 class _NavigationState extends State<Navigation> {
   int currentPageIndex = 0;
-  final PetViewModel petViewModel = PetViewModel(PetModel(name: 'Buddy', happiness: 50, money: 100));
+  final PetViewModel petViewModel = PetViewModel(GlobalData().petModel);
   final CalendarViewModel calendarViewModel = CalendarViewModel();
   final HomepageViewModel homepageViewModel = HomepageViewModel();
   final SettingsModel settingsModel = SettingsModel(false, false);
